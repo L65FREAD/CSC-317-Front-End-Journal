@@ -1,9 +1,47 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:MAUI_Journal_App"
+             mc:Ignorable="d"
              x:Class="MAUI_Journal_App.Pages.JournalList"
-             Title="Journals">
+             Title="Journals"
+             BackgroundColor="{DynamicResource Secondary}">
 
-    <!--Your code here-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <FileImageSource x:Key="AddButton" File="Resources/Images/add_button.svg"/>
+            <FileImageSource x:Key="EditButton" File="Resources/Images/edit_button.svg"/>
+            <FileImageSource x:Key="RemoveButton" File="Resources/Images/remove_button.svg"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
+    <VerticalStackLayout Spacing="0">
+       <!-- Header -->
+        <Grid ColumnDefinitions="*,200,200" BackgroundColor="{DynamicResource Tertiary}" HeightRequest="30" Padding="10">
+            <Label Grid.Column="0" Text="Entry Name" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{DynamicResource White}"/>
+            <Label Grid.Column="1" Text="Entry Count" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{DynamicResource White}" />
+            <Label Grid.Column="2" Text="Options" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{DynamicResource White}" />
+        </Grid>
+
+        <!-- Journal List -->
+        <ListView x:Name="lstJournalList" SeparatorVisibility="None" BackgroundColor="{DynamicResource Primary}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid ColumnDefinitions="*,200,200" HeightRequest="30" Padding="10">
+                            <Label Grid.Column="0" Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{DynamicResource White}"/>
+                            <Label Grid.Column="1" Text="{Binding EntryCount}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{DynamicResource White}"/>
+                            <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                                <Image Source="remove_button.png" HeightRequest="20" WidthRequest="20" IsVisible="true"/>
+                                <Image Source="edit_button.png" HeightRequest="20" WidthRequest="20" IsVisible="true"/>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </VerticalStackLayout>
 </ContentPage>
